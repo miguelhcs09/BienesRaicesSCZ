@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Bienes Raíces SCZ</title>
+  <style>
+    :root { --primary-color: #014D4E; --light-gray: #f9f9f9; --dark-gray: #333; }
+    body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: 'Poppins', sans-serif; background-color: #FFFFFF; }
+    .login-container { background-color: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); text-align: center; width: 100%; max-width: 400px; }
+    .logo-container { margin-bottom: 2em; }
+    .logo-container img { height: 80px; }
+    h2 { color: var(--dark-gray); }
+    .input-group { margin-bottom: 1.5em; text-align: left; }
+    label { display: block; margin-bottom: 5px; color: #555; }
+    input { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 5px; }
+    button { width: 100%; padding: 12px; background-color: var(--primary-color); color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; }
+    #error-message { color: red; margin-top: 1em; }
+    .form-footer { margin-top: 1.5em; font-size: 0.9em; }
+    .form-footer a { color: var(--primary-color); text-decoration: none; }
+  </style>
+</head>
+<body>
+<div class="login-container">
+  <div class="logo-container"><img src="/images/logo.png" alt="Logo Bienes Raíces SCZ"></div>
+  <h2>Iniciar Sesión</h2>
+  <form id="loginForm">
+    <div class="input-group"><label for="email">Email:</label><input type="email" id="email" required></div>
+    <div class="input-group"><label for="password">Contraseña:</label><input type="password" id="password" required></div>
+    <button type="submit">Entrar</button>
+    <p id="error-message"></p>
+  </form>
+  <div class="form-footer"><p>¿No tienes una cuenta? <a href="#" onclick="toggleToRegister()">Regístrate</a></p></div>
+</div>
+<script>
+  const loginForm = document.getElementById('loginForm');
+  const h2 = document.querySelector('.login-container h2');
+  const formFooter = document.querySelector('.form-footer p');
+  const errorMessage = document.getElementById('error-message');
+  let isLogin = true;
+
+  function toggleToRegister() {
+      isLogin = false;
+      h2.innerText = 'Crear Cuenta';
+      loginForm.onsubmit = handleRegister;
+      formFooter.innerHTML = '¿Ya tienes una cuenta? <a href="#" onclick="toggleToLogin()">Inicia Sesión</a>';
+  }
+
+  function toggleToLogin() {
+      isLogin = true;
+      h2.innerText = 'Iniciar Sesión';
+      loginForm.onsubmit = handleLogin;
+      formFooter.innerHTML = '¿No tienes una cuenta? <a href="#" onclick="toggleToRegister()">Regístrate</a>';
+  }
+
+  async function handleLogin(event) {
+      event.preventDefault();
+      errorMessage.innerText = '';
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      try {
+          const response = await fetch('/api/auth/login', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email, password })
+          });
+
+          if (response.ok) {
+              sessionStorage.setItem('usuario', email);
+              window.location.href = '/index.html';
+          } else {
+              const error = await response.text();
+              errorMessage.innerText = error || 'Error en el inicio de sesión.';
+          }
+      } catch (err) { errorMessage.innerText = 'Error de red. Inténtalo de nuevo.'; }
+  }
+
+  async function handleRegister(event) {
+      event.preventDefault();
+      errorMessage.innerText = '';
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      try {
+          const response = await fetch('/api/auth/register', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email, password })
+          });
+
+          if (response.ok) {
+              alert('¡Usuario registrado con éxito! Ahora puedes iniciar sesión.');
+              toggleToLogin();
+          } else {
+              const error = await response.text();
+              errorMessage.innerText = error || 'Error en el registro.';
+          }
+      } catch (err) { errorMessage.innerText = 'Error de red. Inténtalo de nuevo.'; }
+  }
+
+  loginForm.onsubmit = handleLogin;
+</script>
+</body>
+</html>

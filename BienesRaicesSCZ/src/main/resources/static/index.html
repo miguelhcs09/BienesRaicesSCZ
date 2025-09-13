@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Bienvenido - Bienes Raíces SCZ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Poppins', sans-serif; margin: 0; background-color: #FFFFFF; color: #333; }
+    .header { display: flex; justify-content: space-between; align-items: center; padding: 1em 2em; background-color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+    .logo img { height: 50px; width: auto; vertical-align: middle; }
+    .nav a { margin-left: 1.5em; text-decoration: none; color: #555; font-weight: 500; }
+    .main-content { padding: 2em; }
+    .user-info { text-align: right; padding: 1em 2em; font-size: 0.9em; background-color: #f1f1f1; }
+    .user-info button { background: none; border: 1px solid #ccc; padding: 5px 10px; cursor: pointer; margin-left: 10px; border-radius: 5px; }
+    .about-us { display: flex; align-items: center; gap: 3em; background-color: white; padding: 3em; border-radius: 10px; margin-top: 2em; }
+    .about-text, .about-image { flex: 1; }
+    .about-image img { width: 100%; height: auto; border-radius: 10px; object-fit: contain; background-color: #f0f0f0; padding: 20px; box-sizing: border-box; }
+    .stats { display: flex; justify-content: space-between; margin-top: 2em; text-align: center; }
+    .stat-item h3 { font-size: 2.5em; margin-bottom: 0; color: #014D4E; }
+    .stat-item p { margin-top: 0; color: #555; font-size: 0.9em; }
+    .services { padding: 2em 0; }
+    .services h2, .testimonials h2, .contact h2 { text-align: center; font-size: 2.5em; margin-bottom: 1.5em; }
+    .service-item { display: flex; align-items: center; gap: 2em; margin-bottom: 3em; background-color: white; padding: 2em; border-radius: 10px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); }
+    .service-item.reverse { flex-direction: row-reverse; }
+    .service-text, .service-image { flex: 1; }
+    .service-image img { width: 100%; border-radius: 10px; }
+    .service-text h3 { font-size: 1.8em; color: #014D4E; }
+    .testimonials { text-align: center; padding: 3em 2em; background-color: #eef4ff; }
+    .testimonial-card { max-width: 700px; margin: 0 auto; font-size: 1.1em; font-style: italic; color: #555; }
+    .client-name { display: block; margin-top: 1.5em; font-weight: 500; font-style: normal; color: #333; }
+    .contact { display: flex; gap: 3em; background-color: white; padding: 3em; border-radius: 10px; margin-top: 2em; }
+    .contact-details, .contact-form { flex: 1; }
+    .contact-details p { margin: 0 0 1.5em 0; font-size: 1.1em; }
+    .contact-details i { color: #014D4E; width: 25px; }
+    .contact-form input, .contact-form textarea { width: 100%; padding: 12px; margin-bottom: 1em; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    .contact-form button { width: auto; padding: 12px 30px; background-color: #014D4E; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1em; }
+    .footer { background-color: #014D4E; color: white; padding: 3em 2em; text-align: center; }
+    .footer-content h3 { font-size: 2em; margin: 0; font-weight: 500; }
+    .footer-content p { max-width: 500px; margin: 0.5em auto 1em; color: #bdc3c7; }
+    .socials { list-style: none; padding: 0; margin: 1.5em 0; }
+    .socials li { display: inline-block; margin: 0 15px; }
+    .socials a { color: white; font-size: 1.5em; transition: color 0.3s ease; }
+    .socials a:hover { color: #C0A062; }
+    @media (max-width: 768px) { .about-us, .service-item, .service-item.reverse, .contact { flex-direction: column; } .header { flex-direction: column; gap: 1em; } }
+  </style>
+  <script> if (!sessionStorage.getItem('usuario')) { window.location.href = '/login.html'; } </script>
+</head>
+<body>
+<header class="header">
+  <div class="logo"><img src="/images/logo.png" alt="Logo de Bienes Raíces SCZ"></div>
+  <nav class="nav"><a href="/index.html">Inicio</a><a href="/catalogo.html">Catálogo</a><a href="/agentes.html">Nuestros Agentes</a><a href="#contacto">Contacto</a></nav>
+</header>
+<div class="user-info"><span>Iniciaste sesión como: <strong id="usuarioEmail"></strong></span><button onclick="logout()">Cerrar Sesión</button></div>
+<main class="main-content">
+  <section class="about-us"><div class="about-text"><h2>Acerca de Bienes Raíces SCZ</h2><p>En Bienes Raíces SCZ, ofrecemos una experiencia de búsqueda de propiedades que refleja la esencia de cada hogar. Nuestro equipo se dedica a mostrar propiedades en venta o alquiler, asegurando que cada detalle sea claro y accesible.</p><div class="stats"><div class="stat-item"><h3>+3</h3><p>años de experiencia</p></div><div class="stat-item"><h3>+12</h3><p>propiedades destacadas</p></div><div class="stat-item"><h3>+50</h3><p>clientes satisfechos</p></div></div></div><div class="about-image"><img src="/images/logo.png" alt="Logo de Bienes Raíces SCZ"></div></section>
+  <section class="services" id="servicios"><h2>Servicios que ofrecemos</h2><div class="service-item"><div class="service-image"><img src="https://images.pexels.com/photos/8293778/pexels-photo-8293778.jpeg" alt="Asesoría inmobiliaria"></div><div class="service-text"><h3>Asesoría en transacciones inmobiliarias</h3><p>Aprovecha nuestra experiencia en el sector inmobiliario con asesoría integral en cada etapa de tu transacción. Desde la negociación hasta la firma, nuestro equipo te guiará para que cada paso sea claro y sin complicaciones.</p></div></div><div class="service-item reverse"><div class="service-image"><img src="https://images.pexels.com/photos/1642125/pexels-photo-1642125.jpeg" alt="Búsqueda de propiedades"></div><div class="service-text"><h3>Búsqueda de propiedades personalizadas</h3><p>Descubre propiedades que se adaptan a tus necesidades con nuestro servicio de búsqueda personalizada. Nuestro equipo está listo para ayudarte a encontrar la propiedad perfecta, ya sea para compra o alquiler.</p></div></div></section>
+  <section class="testimonials"><h2>Lo que dicen nuestros clientes</h2><div class="testimonial-card"><p>"Bienes Raíces SCZ ha sido fundamental en mi búsqueda de casa. Su atención al detalle y la claridad en la presentación de propiedades me hicieron sentir seguro en cada decisión. La asesoría en transacciones fue excepcional y me ayudó a lograr un trato favorable."</p><span class="client-name">- Anna Valencia</span></div></section>
+  <section class="contact" id="contacto"><div class="contact-details"><h2>Contáctanos</h2><p><i class="fa-solid fa-envelope"></i> <strong>Email:</strong> bienesraicesscz@email.com</p><p><i class="fa-solid fa-phone"></i> <strong>Phone:</strong> 76033067 - 72100555</p><p><i class="fa-solid fa-location-dot"></i> <strong>Address:</strong> UPB, Av. Piraí, 7mo Anillo</p><hr><p>Estamos aquí para responder a tus preguntas y escuchar tus sugerencias.</p></div><div class="contact-form"><form onsubmit="alert('Formulario enviado (simulación)'); return false;"><input type="text" name="name" placeholder="Tu Nombre" required><input type="email" name="email" placeholder="Tu Email" required><textarea name="message" rows="6" placeholder="Escribe tu mensaje aquí..."></textarea><button type="submit">Enviar</button></form></div></section>
+</main>
+<footer class="footer"><div class="footer-content"><h3>Bienes Raíces SCZ</h3><p>Encuéntranos en nuestras redes sociales.</p><ul class="socials"><li><a href="#"><i class="fa-brands fa-instagram"></i></a></li><li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li></ul><p>&copy; 2025 Bienes Raíces SCZ. Todos los derechos reservados.</p></div></footer>
+<script>
+  document.getElementById('usuarioEmail').innerText = sessionStorage.getItem('usuario');
+  function logout() { sessionStorage.removeItem('usuario'); window.location.href = '/login.html'; }
+</script>
+</body>
+</html>
