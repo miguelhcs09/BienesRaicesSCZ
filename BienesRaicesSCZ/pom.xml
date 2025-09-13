@@ -5,14 +5,16 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.5</version> <relativePath/> </parent>
+		<version>3.5.5</version>
+		<relativePath/> </parent>
 	<groupId>com.bienes</groupId>
 	<artifactId>BienesRaicesSCZ</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>BienesRaicesSCZ</name>
 	<description>Proyecto de Bienes Raíces</description>
 	<properties>
-		<java.version>17</java.version> </properties>
+		<java.version>17</java.version>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
